@@ -1,0 +1,23 @@
+[workspace]
+resolver = "2"
+members = [
+    "crates/toolwall-core",
+    "crates/toolwall-cli",
+    "crates/toolwall-policy",
+    "crates/toolwall-fingerprint",
+    "crates/toolwall-audit",
+    "crates/toolwall-redact",
+    "crates/toolwall-proxy",
+    "crates/toolwall-testkit", "crates/toolwall-scan",
+]
+default-members = ["crates/toolwall-cli"]
+
+[workspace.package]
+edition = "2021"
+
+[profile.dev]
+opt-level = 0
+
+[profile.release]
+opt-level = 3
+

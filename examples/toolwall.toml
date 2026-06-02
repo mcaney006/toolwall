@@ -1,0 +1,72 @@
+# toolwall.toml - Production-grade MCP security policy
+# For more info: https://github.com/example/toolwall
+
+version = 1
+
+[defaults]
+# Fail-closed: if no rule matches, the call is denied.
+decision = "deny"
+# Log all decisions for auditing.
+log = true
+
+[secrets]
+# Sensitive patterns that should never be accessed by tools.
+# toolwall uses these to protect against exfiltration even if a tool's 
+# own logic is compromised.
+protected_paths = [
+  "~/.ssh/**",
+  "~/.aws/**",
+  "~/.config/gcloud/**",
+  "~/.azure/**",
+  "**/.env",
+  "**/.env.*",
+  "**/id_rsa",
+  "**/id_ed25519",
+  "**/shadow",
+  "**/passwd"
+]
+
+[[servers]]
+name = "filesystem"
+description = "MCP server for local file operations"
+command = "npx"
+args = ["-y", "@modelcontextprotocol/server-filesystem", "."]
+
+[[servers]]
+name = "github"
+description = "MCP server for GitHub API access"
+command = "npx"
+args = ["-y", "@modelcontextprotocol/server-github"]
+
+[[rules]]
+id = "allow-project-reads"
+description = "Allow read access to the current project directory"
+effect = "allow"
+server = "filesystem"
+tool = "read_file"
+args = { path = { within = "./" } }
+
+[[rules]]
+id = "deny-secret-paths"
+description = "Global block on known secret locations across all tools"
+effect = "deny"
+server = "*"
+tool = "*"
+args = { any_path = { matches_any_secret = true } }
+
+[[rules]]
+id = "approval-for-writes"
+description = "Require manual approval for any file modifications"
+effect = "approval"
+server = "filesystem"
+tool = ["write_file", "edit_file", "delete_file"]
+
+[[rules]]
+id = "restrict-github-org"
+description = "Only allow GitHub operations on the 'trusted-org' organization"
+effect = "allow"
+server = "github"
+tool = "*"
+args = { owner = "trusted-org" }
+
+

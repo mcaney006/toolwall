@@ -1,0 +1,32 @@
+[package]
+name = "toolwall-cli"
+version = "0.1.0"
+edition = "2021"
+# The shipped command is `toolwall` (see README), not the package name. Name the
+# binary explicitly so it does not depend on Cargo inferring bin == package name.
+default-run = "toolwall"
+autobins = false
+
+# This package emits multiple artifacts (and the workspace many more), so cargo
+# target selection must be explicit. Declaring the bin here pins its name to
+# `toolwall` and claims src/main.rs so no second `toolwall-cli` bin is inferred.
+[[bin]]
+name = "toolwall"
+path = "src/main.rs"
+
+[dependencies]
+clap = { version = "4.2", features = ["derive"] }
+toml = "0.7"
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+toolwall-core = { path = "../toolwall-core" }
+toolwall-policy = { path = "../toolwall-policy" }
+toolwall-audit = { path = "../toolwall-audit" }
+toolwall-proxy = { path = "../toolwall-proxy" }
+tracing = "0.1"
+tracing-subscriber = "0.3"
+anyhow = "1.0"
+console = "0.15"
+indicatif = "0.17"
+
+

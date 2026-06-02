@@ -1,0 +1,17 @@
+# Default ignored files
+/shelf/
+/workspace.xml
+# Editor-based HTTP Client requests
+/httpRequests/
+# Ignored default folder with query files
+/queries/
+# Datasource local storage ignored files
+/dataSources/
+/dataSources.local.xml
+# Per-user IDE plugin / transient state (not shared project config)
+/copilotDiffState.xml
+/codestream.xml
+/junie.xml
+/JunieProjectTechnologies.xml
+/awsToolkit.xml
+/google-java-format.xml

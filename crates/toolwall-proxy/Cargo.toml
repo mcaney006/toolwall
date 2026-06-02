@@ -1,0 +1,22 @@
+[package]
+name = "toolwall-proxy"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+tracing = "0.1"
+uuid = { version = "1.4", features = ["v4"] }
+time = "0.3"
+toolwall-core = { path = "../toolwall-core" }
+toolwall-policy = { path = "../toolwall-policy" }
+toolwall-audit = { path = "../toolwall-audit" }
+toolwall-redact = { path = "../toolwall-redact" }
+toolwall-fingerprint = { path = "../toolwall-fingerprint" }
+toolwall-scan = { path = "../toolwall-scan" }
+
+[dev-dependencies]
+assert_fs = "1.0"
+tempfile = "3.8"
+

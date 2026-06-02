@@ -1,0 +1,17 @@
+# Rust / Cargo
+/target/
+**/*.rs.bk
+*.pdb
+
+# Python dev tooling (black formatter env declared in pyproject.toml)
+/.venv/
+__pycache__/
+*.py[cod]
+
+# Local agent / session state — not part of the project
+/.remember/
+/.ai/
+
+# OS & editor noise
+.DS_Store
+*.swp

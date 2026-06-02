@@ -1,0 +1,10 @@
+[package]
+name = "toolwall-redact"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+regex = "1"
+serde_json = "1.0"
+
+
